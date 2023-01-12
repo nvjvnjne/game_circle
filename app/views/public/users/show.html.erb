@@ -1,2 +1,35 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div id="notice"><%= flash[:notice] %></div>
+<div class="container">
+  <div class="card mt-4 w-90 mx-auto shadow-lg">
+    <div class="row mt-4 g-0">
+      <div class="col-md-4 d-flex flex-column">
+        <div class="image ml-4">
+          <%= image_tag @user.get_profile_image(200, 200) %>
+        </div>
+        <div class="link mt-4 ml-4 mb-3">
+          <%= link_to "プロフィール編集", edit_user_path(@user), class:"btn btn-primary" %>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th>名前</th>
+                <th><%= @user.nickname %></th>
+              </tr>
+              <tr>
+                <th>自己紹介</th>
+                <th><%= @user.introduction %></th>
+              </tr>
+              <tr>
+                <th>お気に入りゲーム作品</th>
+                <th><%= @user.fav_game %></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

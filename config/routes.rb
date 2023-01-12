@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # 利用者側
   scope module: :public do
     # ユーザー実装
-    resources :users, only: [:index, :show, :edit]
+    resources :users, only: [:index, :show, :edit, :update]
   end
 
   devise_for :admin,skip: [:registrations, :passwords], controllers: {

@@ -1,2 +1,43 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
+<div class="container">
+  <!--タイトル-->
+  <div class="row mt-4 pl-3">
+    <h4>プロフィール編集</h4>
+  </div>
+
+  <!--入力欄-->
+  <%= form_with model: @user, url: user_path, method: :patch do |f| %>
+
+    <div class="row mt-5 d-flex justify-content-center">
+      <label for="image" class="col-md-2 col-form-label">プロフィール画像</label>
+      <div class="col-md-4">
+        <%= f.file_field :profile_image, class:"form-control-file", placeholder:"ファイルを選択", id:"image", accept:"image/*" %>
+      </div>
+    </div>
+
+    <div class="row mt-3 d-flex justify-content-center">
+      <label for="name" class="col-md-2 col-form-label">名前</label>
+      <div class="col-md-4">
+        <%= f.text_field :nickname, class:"form-control", id:"name" %>
+      </div>
+    </div>
+
+    <div class="row mt-3 d-flex justify-content-center">
+      <label for="introduction" class="col-md-2 col-form-label">自己紹介</label>
+      <div class="col-md-4">
+        <%= f.text_area :introduction, class:"form-control", id:"introduction" %>
+      </div>
+    </div>
+
+    <div class="row mt-3 d-flex justify-content-center">
+      <label for="fav_game" class="col-md-2 col-form-label">お気に入りゲーム</label>
+      <div class="col-md-4">
+        <%= f.text_field :fav_game, class:"form-control", id:"fav_game" %>
+      </div>
+    </div>
+
+    <div class="row mt-3 d-flex justify-content-center">
+      <%= f.submit "編集完了", class:"btn btn-success ml-5" %>
+      <%= link_to "戻る", user_path(current_user), class:"btn btn-primary ml-5" %>
+    </div>
+  <% end %>
+</div>

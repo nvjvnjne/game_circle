@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+
+  # ログイン後マイページ画面へ遷移
+  def after_sign_in_path_for(resource)
+    flash[:notice] = "ログイン成功！"
+    user_path(current_user)
+  end
+
+  # ログアウト後ログイン画面へ遷移
+  def after_sign_out_path_for(resource)
+    flash[:notice] = "ログアウトしました"
+    new_user_session_path
+  end
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
