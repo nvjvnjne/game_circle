@@ -1,0 +1,46 @@
+<div class="container">
+  <!--ページタイトル-->
+  <div class="row mt-4 pl-3">
+    <h4>ゲーム新規登録</h4>
+  </div>
+
+    <!--入力欄-->
+    <%= form_with model: @game, url: games_path, method: :post do |f| %>
+    <!--タイトル-->
+    <div class="row mt-5 d-flex justify-content-center">
+      <label for="title" class="col-md-2 col-form-label">タイトル</label>
+      <div class="col-md-4">
+        <%= f.text_field :title, class:"form-conrol", id:"title" %>
+      </div>
+    </div>
+
+    <!--プレイ状況-->
+    <div class="row mt-2 d-flex justify-content-center">
+      <label for="play_conditon" class="col-md-2 col-form-label">プレイ状況</label>
+      <div class="col-md-4 col-form-label">
+        <%= f.select :play_condition,  Game.play_conditions.keys.map {|k| [I18n.t("enums.game.play_condition.#{k}"), k]}, include_blank: "選択してください" %>
+      </div>
+    </div>
+
+    <!--ジャンル-->
+    <div class="row mt-2 d-flex justify-content-center">
+      <label for="genre" class="col-md-2 col-form-label">ジャンル</label>
+      <div class="col-md-4 col-form-label">
+        <%= f.select :genre,  Game.genres.keys.map {|k| [I18n.t("enums.game.genre.#{k}"), k]}, include_blank: "選択してください" %>
+      </div>
+    </div>
+
+    <!--つぶやき-->
+    <div class="row mt-2 d-flex justify-content-center">
+      <label for="opinion" class="col-md-2 col-form-label">つぶやき</label>
+      <div class="col-md-4">
+        <%= f.text_area :opinion, class:"form-control", id:"opinion" %>
+      </div>
+    </div>
+
+    <!--新規登録ボタン-->
+    <div class="row mt-3 d-flex justify-content-center">
+      <%= f.submit "決定する", class:"btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

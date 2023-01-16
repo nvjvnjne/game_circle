@@ -59,7 +59,12 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #デバイスの実装
 gem 'devise'
+
 #ページネーションの実装
 gem 'kaminari','~> 1.2.1'
+
 #enum実装
 gem 'enum_help'
+
+# 楽天API実装
+gem 'rakuten_web_service'

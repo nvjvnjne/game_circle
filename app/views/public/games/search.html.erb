@@ -1,0 +1,21 @@
+<div class="container">
+
+  <!--ページタイトル-->
+  <div class="row mt-4 pl-3">
+    <h4>ゲーム検索</h4>
+  </div>
+
+  <!--検索フォーム-->
+  <div class="row mt-2 mb-4">
+    <%= form_with url: game_search_path, method: :get, local: true do |f| %>
+        <%= f.text_field :keyword %>
+        <%= f.submit "検索" %>
+    <% end %>
+  </div>
+
+  <!--検索結果-->
+  <h4>検索結果</h4>
+  <% if @games.present? %>
+    <%= render partial: 'game_list' %>
+  <% end %>
+</div>

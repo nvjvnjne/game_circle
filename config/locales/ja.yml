@@ -1,0 +1,16 @@
+ja:
+  enums:
+    game:
+      play_condition:
+        not_play: "未プレイ"
+        play_soon: "プレイ予定"
+        have_played: "プレイ済み"
+        
+      genre:
+        ps: "PS5/PS4"
+        switch: "Nintendo Switch"
+        ds: "3DS/DS"
+        steam: "Steam"
+        pc: "PC"
+        smartphone: "スマホ"
+        other: "その他"

@@ -1,8 +1,10 @@
 <div class="container">
+
   <!--ページタイトル-->
   <div class="row mt-4 pl-3">
     <h4>ユーザー一覧</h4>
   </div>
+  <!--ここまで-->
 
   <!--ユーザーの一覧を表示-->
   <div class="row mt-4 d-flex justify-content-center">
@@ -17,17 +19,23 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
+            <!--プロフィール画像-->
             <td>
               <%= link_to user_path(user.id) do %>
                 <%= image_tag user.get_profile_image(100, 100) %>
               <% end %>
             </td>
+            <!--名前-->
             <td><%= user.nickname %></td>
+            <!--ユーザー詳細ページへ遷移-->
             <td><%= link_to "詳細", user_path(user.id), class:"btn btn-success" %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
+
+    <!--ページネーション-->
     <%= paginate @users %>
   </div>
+  <!--ここまで-->
 </div>
