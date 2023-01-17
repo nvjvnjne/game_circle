@@ -19,7 +19,7 @@
     <div class="col-md-4">
       <% if current_user.nickname != "GuestUser" %>
         <p>画像なしで投稿する場合は
-        <%= link_to "こちら", new_game_path, method: :post %>
+        <%= link_to "こちら", new_game_path %>
         から
         </p>
       <% end %>

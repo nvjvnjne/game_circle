@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2023_01_15_060515) do
 
   create_table "games", force: :cascade do |t|
     t.string "title", null: false
+    t.integer "user_id", null: false
     t.integer "genre", null: false
     t.integer "play_condition", null: false
     t.string "smallImageUrl"

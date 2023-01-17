@@ -19,11 +19,10 @@ Rails.application.routes.draw do
     # ユーザー実装
     resources :users, only: [:index, :show, :edit, :update]
     # ゲーム機能
-    resources :games, only: [:create, :show, :edit, :update, :destroy]
+    resources :games, only: [:new, :create, :show, :edit, :update, :destroy]
   end
   # ゲーム検索ページ(画像入手)
   get 'search'=>'public/games#search', as: 'game_search'
-  post 'games/new'=>'public/games#new', as: 'new_game'
 
   # 管理者側
   devise_for :admin,skip: [:registrations, :passwords], controllers: {

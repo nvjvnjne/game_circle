@@ -6,21 +6,27 @@
 
   <!--投稿ゲーム画像-->
   <div class="row mt-2 d-flex justify-content-center">
-    <%= image_tag @game.largeImageUrl %>
+    <% if @game.largeImageUrl.present? %>
+      <%= image_tag @game.largeImageUrl %>
+    <% else %>
+      <%= image_tag 'no_image', size: "200×200" %>
+    <% end %>
   </div>
 
   <!--投稿主-->
   <div class="row mt-4 d-flex justify-content-center">
-    <label class="col-md-2 col-form-lael">投稿主</label>
-    <div class="col-md-4">
-      <%= @user %>
+    <label class="col-md-2 col-form-label">投稿主</label>
+    <div class="col-md-4 col-form-label">
+      <%= link_to user_path(@user) do %>
+        <%= @user.nickname %>
+      <% end %>
     </div>
   </div>
 
   <!--タイトル-->
   <div class="row mt-2 d-flex justify-content-center">
     <label class="col-md-2 col-form-label">ゲームタイトル</label>
-    <div class="col-md-4">
+    <div class="col-md-4 col-form-label">
       <%= @game.title %>
     </div>
   </div>
@@ -28,23 +34,23 @@
   <!--プレイ状況-->
   <div class="row mt-2 d-flex justify-content-center">
     <label class="col-md-2 col-form-label">プレイ状況</label>
-    <div class="col-md-4">
-      <%= @game.play_condition %>
+    <div class="col-md-4 col-form-label">
+      <%= I18n.t("enums.game.play_condition." + @game.play_condition) %>
     </div>
   </div>
 
   <!--ジャンル-->
   <div class="row mt-2 d-flex justify-content-center">
     <label class="col-md-2 col-form-label">ジャンル</label>
-    <div class="col-md-4">
-      <%= @game.genre %>
+    <div class="col-md-4 col-form-label">
+      <%= I18n.t("enums.game.genre." + @game.genre) %>
     </div>
   </div>
 
   <!--つぶやき-->
   <div class="row mt-2 d-flex justify-content-center">
     <label class="col-md-2 col-form-label">つぶやき</label>
-    <div class="col-md-4">
+    <div class="col-md-4 col-form-label">
       <%= @game.opinion %>
     </div>
   </div>

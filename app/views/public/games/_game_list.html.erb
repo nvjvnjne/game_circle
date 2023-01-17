@@ -16,8 +16,9 @@
               <th><%= game['title'] %></th>
               <th><%= game['hardware'] %></th>
               <th>
-                <%= form_with model: @game, url: new_game_path, method: :post do |f| %>
-                  <%= f.hidden_field :largeImageUrl, value: image_tag(game['largeImageUrl']) %>
+                <%= form_with model: @game, url: new_game_path, method: :get do |f| %>
+                  <%=f.hidden_field :smallImageUrl, value: game['smallImageUrl'] %>
+                  <%= f.hidden_field :largeImageUrl, value: game['largeImageUrl'] %>
                   <%= f.submit "この画像を使う", class:"btn btn-primary" %>
                 <% end %>
               </th>

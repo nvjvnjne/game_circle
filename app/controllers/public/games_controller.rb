@@ -10,12 +10,15 @@ class Public::GamesController < ApplicationController
 
   def new
     @game = Game.new
+    @game_sm_image_url = params.dig(:game, :smallImageUrl)
+    @game_image_url = params.dig(:game, :largeImageUrl)
   end
 
   def create
     game = Game.new(game_params)
+    game.user_id = current_user.id
     game.save
-    redirect_to game_path
+    redirect_to game_path(game)
   end
 
   def show
@@ -30,5 +33,11 @@ class Public::GamesController < ApplicationController
   end
 
   def destroy
+  end
+  
+  private
+  
+  def game_params
+    params.require(:game).permit(:title, :genre, :play_condition, :smallImageUrl, :largeImageUrl, :itemUrl, :opinion)
   end
 end

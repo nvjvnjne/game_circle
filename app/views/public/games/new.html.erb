@@ -20,11 +20,10 @@
     <div class="row mt-5 d-flex justify-content-center">
       <label class="col-md-2 col-form-label">ゲーム画像</label>
       <div class="col-md-4">
-        <% if @game.largeImageUrl.present? %>
-          <%= image_tag game.largeImageUrl %>
+        <% if @game_image_url.present? %>
+          <%= image_tag @game_image_url %>
         <% else %>
           <%= image_tag 'no_image', size: "200×200" %>
-          <%= f.hidden_field :largeImageUrl, value: image_tag('no_image') %>
         <% end %>
       </div>
     </div>
@@ -61,6 +60,8 @@
       </div>
     </div>
 
+    <%= f.hidden_field :smallImageUrl, value: @game_sm_image_url ||= "" %>
+    <%= f.hidden_field :largeImageUrl, value: @game_image_url ||= "" %>
     <!--新規登録ボタン-->
     <div class="row mt-3 d-flex justify-content-center">
       <!--ゲストユーザーのみ新規登録できない-->
