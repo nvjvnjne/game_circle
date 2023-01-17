@@ -27,16 +27,27 @@ class Public::GamesController < ApplicationController
   end
 
   def edit
+    @game = Game.find(params[:id])
   end
 
   def update
+    game = Game.find(params[:id])
+    if game.update(game_params)
+      flash[:notice] = "編集完了！"
+      redirect_to game_path(game)
+    end
   end
 
   def destroy
+    game = Game.find(params[:id])
+    if game.destroy
+      flash[:notice] = "投稿を1件削除しました"
+      redirect_to user_path(current_user)
+    end
   end
-  
+
   private
-  
+
   def game_params
     params.require(:game).permit(:title, :genre, :play_condition, :smallImageUrl, :largeImageUrl, :itemUrl, :opinion)
   end

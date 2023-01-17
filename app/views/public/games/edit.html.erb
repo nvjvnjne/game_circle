@@ -1,0 +1,57 @@
+<div class="container">
+  <!--ページタイトル-->
+  <div class="row mt-4 pl-3">
+    <h4>投稿編集</h4>
+  </div>
+
+  <!--ゲーム画像(編集不可)-->
+  <div class="row mt-2 d-flex justify-content-center">
+    <% if @game.largeImageUrl.present? %>
+      <%= image_tag @game.largeImageUrl %>
+    <% else %>
+      <%= image_tag 'no_image', size: "200×200" %>
+    <% end %>
+  </div>
+
+  <!--入力欄-->
+  <%= form_with model: @game, url: game_path, method: :patch do |f| %>
+    <!--ゲームタイトル-->
+    <div class="row mt-2 d-flex justify-content-center">
+      <label for="title" class="col-md-2 col-form-label">ゲームタイトル</label>
+      <div class="col-md-4">
+        <%= f.text_field :title, class:"form-conrol", id:"title" %>
+      </div>
+    </div>
+
+    <!--プレイ状況-->
+    <div class="row mt-2 d-flex justify-content-center">
+      <label for="play_condition" class="col-md-2 col-form-label">プレイ状況</label>
+      <div class="col-md-4 col-form-label">
+        <%= f.select :play_condition,  Game.play_conditions.keys.map {|k| [I18n.t("enums.game.play_condition.#{k}"), k]}, id:"play_condition" %>
+      </div>
+    </div>
+
+    <!--ジャンル-->
+    <div class="row mt-2 d-flex justify-content-center">
+      <label for="genre" class="col-md-2 col-form-label">ジャンル</label>
+      <div class="col-md-4 col-form-label">
+        <%= f.select :genre,  Game.genres.keys.map {|k| [I18n.t("enums.game.genre.#{k}"), k]}, id:"genre" %>
+      </div>
+    </div>
+
+    <!--つぶやき-->
+    <div class="row mt-2 d-flex justify-content-center">
+      <label for="opinion" class="col-md-2 col-form-label">つぶやき</label>
+      <div class="col-md-4">
+        <%= f.text_area :opinion, class:"form-control", id:"opinion" %>
+      </div>
+    </div>
+
+    <!--編集完了ボタン(ゲストユーザーは非表示)-->
+    <div class="row mt-3 d-flex justify-content-center">
+      <% if current_user.nickname != "GuestUser" %>
+        <%= f.submit "編集完了", class:"btn btn-success" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
