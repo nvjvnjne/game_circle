@@ -13,6 +13,15 @@ class Public::SessionsController < Devise::SessionsController
     flash[:notice] = "ログアウトしました"
     new_user_session_path
   end
+  
+  # ゲストログイン
+  def guest_sign_in
+    user = User.guest
+    if sign_in user
+      flash[:notice] = "ゲストユーザーとしてログインしました"
+      redirect_to user_path(current_user)
+    end
+  end
 
   # before_action :configure_sign_in_params, only: [:create]
 

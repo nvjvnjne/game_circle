@@ -3,12 +3,22 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
+  # ゲストユーザー
+  def self.guest
+    find_or_create_by(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.nickname = "GuestUser"
+    end
+  end
 
-
+  # アソシエーション
+  has_many :games, dependent: :destroy
 
   # 画像の実装
   has_one_attached :profile_image
 
+  # プロフィール画像の実装
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

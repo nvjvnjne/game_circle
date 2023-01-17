@@ -1,5 +1,13 @@
 class Public::GamesController < ApplicationController
 
+  def search
+    if params[:keyword]
+      @keyword = params[:keyword]
+      @games = RakutenWebService::Books::Game.search(title: params[:keyword])
+      @game = Game.new
+    end
+  end
+
   def new
     @game = Game.new
   end
@@ -11,13 +19,8 @@ class Public::GamesController < ApplicationController
   end
 
   def show
-  end
-
-  def search
-    if params[:keyword]
-      @keyword = params[:keyword]
-      @games = RakutenWebService::Books::Game.search(title: params[:keyword])
-    end
+    @game = Game.find(params[:id])
+    @user = @game.user
   end
 
   def edit

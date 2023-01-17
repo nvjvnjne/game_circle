@@ -7,10 +7,23 @@
 
   <!--検索フォーム-->
   <div class="row mt-2 mb-4">
-    <%= form_with url: game_search_path, method: :get, local: true do |f| %>
-        <%= f.text_field :keyword %>
-        <%= f.submit "検索" %>
-    <% end %>
+
+    <div class="col-md-4">
+      <%= form_with url: game_search_path, method: :get, local: true do |f| %>
+          <%= f.text_field :keyword %>
+          <%= f.submit "検索" %>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+      <% if current_user.nickname != "GuestUser" %>
+        <p>画像なしで投稿する場合は
+        <%= link_to "こちら", new_game_path, method: :post %>
+        から
+        </p>
+      <% end %>
+    </div>
   </div>
 
   <!--検索結果-->

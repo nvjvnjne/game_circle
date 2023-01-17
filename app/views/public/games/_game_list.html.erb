@@ -1,7 +1,9 @@
 <div class="container">
 
   <div class="row mt-2 pl-3">
-    <p><%= @games.count %>件表示</p>
+    <% if @games.present? %>
+      <p><%= @games.count %>件表示</p>
+    <% end %>
   </div>
 
   <div class="row mt-2 d-flex justify-content-center">
@@ -13,6 +15,12 @@
               <th><%= link_to (image_tag(game['smallImageUrl'])), game['itemUrl'] %></th>
               <th><%= game['title'] %></th>
               <th><%= game['hardware'] %></th>
+              <th>
+                <%= form_with model: @game, url: new_game_path, method: :post do |f| %>
+                  <%= f.hidden_field :largeImageUrl, value: image_tag(game['largeImageUrl']) %>
+                  <%= f.submit "この画像を使う", class:"btn btn-primary" %>
+                <% end %>
+              </th>
             </tr>
           <% end %>
         </tbody>

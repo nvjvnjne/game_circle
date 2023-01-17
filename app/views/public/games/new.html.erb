@@ -1,13 +1,36 @@
 <div class="container">
   <!--ページタイトル-->
   <div class="row mt-4 pl-3">
-    <h4>ゲーム新規登録</h4>
+    <div class="col-md-3">
+      <h4>ゲーム新規登録</h4>
+    </div>
+    <div class="col-md-5">
+    </div>
+    <div class="col-md-4">
+      <p>画像を入手したい方は
+      <%= link_to "こちら", game_search_path %>
+      から
+      </p>
+    </div>
   </div>
 
     <!--入力欄-->
     <%= form_with model: @game, url: games_path, method: :post do |f| %>
-    <!--タイトル-->
+
     <div class="row mt-5 d-flex justify-content-center">
+      <label class="col-md-2 col-form-label">ゲーム画像</label>
+      <div class="col-md-4">
+        <% if @game.largeImageUrl.present? %>
+          <%= image_tag game.largeImageUrl %>
+        <% else %>
+          <%= image_tag 'no_image', size: "200×200" %>
+          <%= f.hidden_field :largeImageUrl, value: image_tag('no_image') %>
+        <% end %>
+      </div>
+    </div>
+
+    <!--タイトル-->
+    <div class="row mt-2 d-flex justify-content-center">
       <label for="title" class="col-md-2 col-form-label">タイトル</label>
       <div class="col-md-4">
         <%= f.text_field :title, class:"form-conrol", id:"title" %>
@@ -40,7 +63,10 @@
 
     <!--新規登録ボタン-->
     <div class="row mt-3 d-flex justify-content-center">
-      <%= f.submit "決定する", class:"btn btn-primary" %>
+      <!--ゲストユーザーのみ新規登録できない-->
+      <% if current_user.nickname != "GuestUser" %>
+        <%= f.submit "決定する", class:"btn btn-primary" %>
+      <% end %>
     </div>
   <% end %>
 </div>

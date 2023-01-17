@@ -1,0 +1,51 @@
+<div class="container">
+  <!--ページタイトル-->
+  <div class="row mt-4 pl-3">
+    <h4>ゲーム詳細</h4>
+  </div>
+
+  <!--投稿ゲーム画像-->
+  <div class="row mt-2 d-flex justify-content-center">
+    <%= image_tag @game.largeImageUrl %>
+  </div>
+
+  <!--投稿主-->
+  <div class="row mt-4 d-flex justify-content-center">
+    <label class="col-md-2 col-form-lael">投稿主</label>
+    <div class="col-md-4">
+      <%= @user %>
+    </div>
+  </div>
+
+  <!--タイトル-->
+  <div class="row mt-2 d-flex justify-content-center">
+    <label class="col-md-2 col-form-label">ゲームタイトル</label>
+    <div class="col-md-4">
+      <%= @game.title %>
+    </div>
+  </div>
+
+  <!--プレイ状況-->
+  <div class="row mt-2 d-flex justify-content-center">
+    <label class="col-md-2 col-form-label">プレイ状況</label>
+    <div class="col-md-4">
+      <%= @game.play_condition %>
+    </div>
+  </div>
+
+  <!--ジャンル-->
+  <div class="row mt-2 d-flex justify-content-center">
+    <label class="col-md-2 col-form-label">ジャンル</label>
+    <div class="col-md-4">
+      <%= @game.genre %>
+    </div>
+  </div>
+
+  <!--つぶやき-->
+  <div class="row mt-2 d-flex justify-content-center">
+    <label class="col-md-2 col-form-label">つぶやき</label>
+    <div class="col-md-4">
+      <%= @game.opinion %>
+    </div>
+  </div>
+</div>
