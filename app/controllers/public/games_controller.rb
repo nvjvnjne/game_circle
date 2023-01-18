@@ -24,6 +24,7 @@ class Public::GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @user = @game.user
+    @comment = Comment.new
   end
 
   def edit

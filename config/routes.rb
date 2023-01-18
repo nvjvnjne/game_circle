@@ -19,7 +19,10 @@ Rails.application.routes.draw do
     # ユーザー実装
     resources :users, only: [:index, :show, :edit, :update]
     # ゲーム機能
-    resources :games, only: [:new, :create, :show, :edit, :update, :destroy]
+    resources :games, only: [:new, :create, :show, :edit, :update, :destroy] do
+      resources :comments, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
+    end
   end
   # ゲーム検索ページ(画像入手)
   get 'search'=>'public/games#search', as: 'game_search'

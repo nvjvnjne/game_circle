@@ -6,6 +6,7 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @games =@user.games
+    @favorites = Favorite.where(user_id: @user)
   end
 
   def edit

@@ -68,6 +68,63 @@
     </div>
   </div>
 
+  <!--コメント-->
+  <div class="row mt-3 d-flex justify-content-between">
+    <div class="comment">
+      <h4>コメント</h4>
+    </div>
+    <!--お気に入り登録/解除(ゲストユーザーは非表示)-->
+    <% if current_user.nickname != "GuestUser" %>
+      <div class="favorite">
+        <% if @game.favorited_by?(current_user) %>
+          <%= link_to "お気に入り解除する", game_favorites_path(@game), method: :delete, class:"btn btn-danger" %>
+        <% else %>
+          <%= link_to "お気に入り登録する", game_favorites_path(@game), method: :post, class:"btn btn-primary" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <!--コメント入力(ゲストユーザーは非表示)-->
+  <div class="row mt-3 d-flex justify-content-center">
+    <% if current_user.nickname != "GuestUser" %>
+      <%= form_with model: [@game, @comment] do |f| %>
+        <%= f.text_area :comment, placeholder:"コメントを入力" %>
+        <%= f.submit "送信", class:"btn btn-light" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <!--コメント数-->
+  <div class="row mt-3">
+    <p><%= @game.comments.count %> コメント</p>
+  </div>
+
+  <!--コメント-->
+  <div class="row mt-2 d-flex justify-content-center">
+    <table class="table">
+      <tbody>
+        <% @game.comments.each do |comment| %>
+          <tr>
+            <th><%= comment.created_at.strftime('%Y/%m/%d') %></th>
+            <th>
+              <%= link_to user_path(comment.user_id) do %>
+                <%= image_tag comment.user.get_profile_image(100, 100) %><br>
+                <%= comment.user.nickname %>
+              <% end %>
+            </th>
+            <th><%= comment.comment %></th>
+            <th>
+              <% if comment.user == current_user %>
+                <%= link_to "削除する", game_comment_path(comment.game, comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class:"btn btn-danger" %>
+              <% end %>
+            </th>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
   <!--戻る、編集ボタン-->
   <div class="row my-3 d-flex justify-content-center">
     <!--ユーザー詳細へ戻る-->

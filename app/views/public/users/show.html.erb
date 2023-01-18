@@ -49,6 +49,41 @@
     </div>
   </div>
 
+  <!--お気に入りゲーム-->
+  <div class="row mt-4 d-flex justify-content-center">
+    <h4>お気に入りゲーム作品</h4>
+  </div>
+
+  <!--お気に入り一覧-->
+  <div class="row mt-3 d-flex justify-content-center">
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th>ゲーム画像</th>
+          <th>タイトル</th>
+          <th>ジャンル</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @favorites.each do |favorite| %>
+          <tr>
+            <td>
+              <% if favorite.game.smallImageUrl.present? %>
+                <%= image_tag favorite.game.smallImageUrl %>
+              <% else %>
+                <%= image_tag 'no_image', size: "100×100" %>
+              <% end %>
+            </td>
+            <td><%= favorite.game.title %></td>
+            <td><%= I18n.t("enums.game.genre." + favorite.game.genre) %></td>
+            <td><%= link_to "詳細", game_path(favorite.game_id), class:"btn btn-success" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
   <!--投稿ゲーム一覧と新規投稿ボタン-->
   <div class="row mt-4 d-flex justify-content-end">
     <div class="col-md-5">
@@ -78,6 +113,7 @@
       <tbody>
         <% @games.each do |game| %>
           <tr>
+            <!--画像が投稿されていたら表示、そうでない場合はno_image画像を表示-->
             <td>
               <% if game.smallImageUrl.present? %>
                 <%= image_tag game.smallImageUrl %>
