@@ -19,8 +19,10 @@ Rails.application.routes.draw do
     # ユーザー実装
     resources :users, only: [:index, :show, :edit, :update]
     # ゲーム機能
-    resources :games, only: [:new, :create, :show, :edit, :update, :destroy] do
+    resources :games, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      # コメント機能
       resources :comments, only: [:create, :destroy]
+      # お気に入り機能
       resource :favorites, only: [:create, :destroy]
     end
   end

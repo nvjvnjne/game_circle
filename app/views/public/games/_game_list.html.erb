@@ -1,31 +1,32 @@
 <div class="container">
-
-  <div class="row mt-2 pl-3">
-    <% if @games.present? %>
+  <!--未入力で検索した場合、リダイレクトする-->
+  <% if params[:keyword].present? %>
+    <div class="row mt-2 pl-3">
       <p><%= @games.count %>件表示</p>
-    <% end %>
-  </div>
-
-  <div class="row mt-2 d-flex justify-content-center">
-    <div class="table-responsible">
-      <table class="table table-hover table-inverse">
-        <tbody>
-          <% @games.each do |game| %>
-            <tr>
-              <th><%= link_to (image_tag(game['smallImageUrl'])), game['itemUrl'] %></th>
-              <th><%= game['title'] %></th>
-              <th><%= game['hardware'] %></th>
-              <th>
-                <%= form_with model: @game, url: new_game_path, method: :get do |f| %>
-                  <%=f.hidden_field :smallImageUrl, value: game['smallImageUrl'] %>
-                  <%= f.hidden_field :largeImageUrl, value: game['largeImageUrl'] %>
-                  <%= f.submit "この画像を使う", class:"btn btn-primary" %>
-                <% end %>
-              </th>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
     </div>
-  </div>
+
+    <!--検索結果-->
+    <div class="row mt-2 d-flex justify-content-center">
+      <div class="table-responsible">
+        <table class="table table-hover table-inverse">
+          <tbody>
+            <% @games.each do |game| %>
+              <tr>
+                <th><%= link_to (image_tag(game['smallImageUrl'])), game['itemUrl'] %></th>
+                <th><%= game['title'] %></th>
+                <th><%= game['hardware'] %></th>
+                <th>
+                  <%= form_with model: @game, url: new_game_path, method: :get do |f| %>
+                    <%=f.hidden_field :smallImageUrl, value: game['smallImageUrl'] %>
+                    <%= f.hidden_field :largeImageUrl, value: game['largeImageUrl'] %>
+                    <%= f.submit "この画像を使う", class:"btn btn-primary" %>
+                  <% end %>
+                </th>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
 </div>

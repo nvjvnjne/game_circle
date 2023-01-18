@@ -4,8 +4,10 @@ class Public::CommentsController < ApplicationController
     game = Game.find(params[:game_id])
     comment = current_user.comments.new(comment_params)
     comment.game_id = game.id
-    comment.save
-    redirect_to game_path(game)
+    if comment.save
+      flash[:notice] = "コメントを送信しました"
+      redirect_to game_path(game)
+    end
   end
 
   def destroy

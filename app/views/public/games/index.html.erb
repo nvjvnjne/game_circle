@@ -1,0 +1,64 @@
+<div class="container">
+
+  <!--ページタイトル-->
+  <div class="row mt-4 pl-3">
+    <h4>ゲーム投稿一覧</h4>
+  </div>
+
+  <!--検索-->
+  <div class="row mt-3 d-flex justify-content-center">
+    <div class="search mr-3">
+      <%= form_with url: games_path, method: :get, local: true do |f| %>
+        <%= f.text_field :search, placeholder:"タイトルを入力" %>
+        <%= f.submit "検索", name: nil %>
+      <% end %>
+    </div>
+
+    <div class="tag-search">
+      <%= form_with url: games_path, method: :get, local: true do |f| %>
+        <%= f.select :genre,  Game.genres.keys.map {|k| [I18n.t("enums.game.genre.#{k}"), k]}, include_blank: "選択してください" %>
+        <%= f.submit "検索", name: nil %>
+      <% end %>
+    </div>
+  </div>
+
+  <!--検索結果数表示-->
+  <div class="row mt-2">
+    <% if params[:search].present? %>
+      <%= @games.count %> 件表示
+    <% end %>
+  </div>
+
+  <!--ゲーム投稿一覧-->
+  <div class="row mt-3 d-flex justify-content-center">
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th>ゲーム画像</th>
+          <th>タイトル</th>
+          <th>ジャンル</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @games.each do |game| %>
+          <tr>
+            <!--ゲーム画像が送られていればそれを表示、送られていなければno_image画像を表示-->
+            <td>
+              <% if game.smallImageUrl.present? %>
+                <%= image_tag game.smallImageUrl %>
+              <% else %>
+                <%= image_tag 'no_image', size: "100×100" %>
+              <% end %>
+            </td>
+            <td><%= game.title %></td>
+            <td><%= I18n.t("enums.game.genre." + game.genre) %></td>
+            <td><%= link_to "詳細", game_path(game.id), class:"btn btn-success" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <!--ページネーション-->
+    <%= paginate @games %>
+  </div>
+</div>

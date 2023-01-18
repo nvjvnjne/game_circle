@@ -21,6 +21,17 @@ class Public::GamesController < ApplicationController
     redirect_to game_path(game)
   end
 
+  def index
+    @games = Game.order('id DESC').page(params[:page])
+    if params[:search].present?
+      @games = @games.where('title LIKE ?', "%#{params[:search]}%")
+    end
+
+    if params[:genre].present?
+      @games = @games.where('genre LIKE ?', "#{params[:genre]}")
+    end
+  end
+
   def show
     @game = Game.find(params[:id])
     @user = @game.user

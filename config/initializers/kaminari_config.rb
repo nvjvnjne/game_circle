@@ -13,5 +13,5 @@ Kaminari.configure do |config|
   # config.params_on_first_page = false
 
   # 1ページの表示件数
-  config.default_per_page = 5
+  config.default_per_page = 10
 end

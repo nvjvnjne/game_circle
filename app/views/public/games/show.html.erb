@@ -26,8 +26,15 @@
     <% end %>
   </div>
 
-  <!--投稿主-->
   <div class="row mt-4 d-flex justify-content-center">
+    <label class="col-md-2 col-form-label">投稿日</label>
+    <div class="col-md-4 col-form-label">
+      <%= @game.created_at.strftime('%Y/%m/%d %R:%S') %>
+    </div>
+  </div>
+
+  <!--投稿主-->
+  <div class="row mt-2 d-flex justify-content-center">
     <label class="col-md-2 col-form-label">投稿主</label>
     <div class="col-md-4 col-form-label">
       <%= link_to user_path(@user) do %>
@@ -106,7 +113,10 @@
       <tbody>
         <% @game.comments.each do |comment| %>
           <tr>
-            <th><%= comment.created_at.strftime('%Y/%m/%d') %></th>
+            <th>
+              <%= comment.created_at.strftime('%Y/%m/%d') %><br>
+              <%= comment.created_at.strftime('%R:%S') %>
+            </th>
             <th>
               <%= link_to user_path(comment.user_id) do %>
                 <%= image_tag comment.user.get_profile_image(100, 100) %><br>
