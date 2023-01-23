@@ -1,20 +1,9 @@
-<!--ユーザーページ-->
-<!--フラッシュメッセージ-->
-<div id="notice"><%= flash[:notice] %></div>
-
+<!--管理者ページ-->
 <div class="container">
+  <!--ページタイトル-->
   <div class="row mt-4 pl-3">
-    <!--ページタイトル-->
     <div class="col-md-3">
       <h4>ゲーム詳細</h4>
-    </div>
-    <div class="col-md-7">
-    </div>
-    <!--削除ボタン-->
-    <div class="col-md-2">
-      <% if @user == current_user %>
-        <%= link_to "削除する", game_path, method: :delete, "data-confirm" => "投稿を削除しますか？", class:"btn btn-danger" %>
-      <% end %>
     </div>
   </div>
 
@@ -38,7 +27,7 @@
   <div class="row mt-2 d-flex justify-content-center">
     <label class="col-md-2 col-form-label">投稿主</label>
     <div class="col-md-4 col-form-label">
-      <%= link_to user_path(@user) do %>
+      <%= link_to admin_user_path(@user) do %>
         <%= @user.nickname %>
       <% end %>
     </div>
@@ -64,7 +53,7 @@
   <div class="row mt-2 d-flex justify-content-center">
     <label class="col-md-2 col-form-label">ジャンル</label>
     <div class="col-md-4 col-form-label">
-      <%= @game.genre.name %>
+      <%= I18n.t("enums.game.genre." + @game.genre) %>
     </div>
   </div>
 
@@ -77,30 +66,10 @@
   </div>
 
   <!--コメント-->
-  <div class="row mt-3 d-flex justify-content-between">
+  <div class="row mt-3 pl-3">
     <div class="comment">
       <h4>コメント</h4>
     </div>
-    <!--お気に入り登録/解除(ゲストユーザーは非表示)-->
-    <% if current_user.nickname != "GuestUser" %>
-      <div class="favorite">
-        <% if @game.favorited_by?(current_user) %>
-          <%= link_to "お気に入り解除する", game_favorites_path(@game), method: :delete, class:"btn btn-danger" %>
-        <% else %>
-          <%= link_to "お気に入り登録する", game_favorites_path(@game), method: :post, class:"btn btn-primary" %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-
-  <!--コメント入力(ゲストユーザーは非表示)-->
-  <div class="row mt-3 d-flex justify-content-center">
-    <% if current_user.nickname != "GuestUser" %>
-      <%= form_with model: [@game, @comment] do |f| %>
-        <%= f.text_area :comment, placeholder:"コメントを入力" %>
-        <%= f.submit "送信", class:"btn btn-light" %>
-      <% end %>
-    <% end %>
   </div>
 
   <!--コメント数-->
@@ -134,9 +103,7 @@
             </th>
             <th><%= comment.comment %></th>
             <th>
-              <% if comment.user == current_user %>
-                <%= link_to "削除する", game_comment_path(comment.game, comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class:"btn btn-danger" %>
-              <% end %>
+              <%= link_to "削除する", admin_game_comment_path(comment.game, comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class:"btn btn-danger" %>
             </th>
           </tr>
         <% end %>
@@ -144,14 +111,4 @@
     </table>
   </div>
 
-  <!--戻る、編集ボタン-->
-  <div class="row my-3 d-flex justify-content-center">
-    <!--ユーザー詳細へ戻る-->
-    <%= link_to "戻る", user_path(@user), class:"btn btn-primary" %>
-    <!--ログインユーザーのみ編集ページへ遷移-->
-    <% if @user == current_user %>
-      <%= link_to "編集する", edit_game_path(@user), class:"btn btn-success ml-5" %>
-    <% end %>
-
-  </div>
 </div>

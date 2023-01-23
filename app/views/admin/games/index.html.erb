@@ -1,0 +1,41 @@
+<!--管理者ページ-->
+<div class="container">
+
+  <!--ページタイトル-->
+  <div class="row mt-4 pl-3">
+    <h4>ゲーム投稿一覧</h4>
+  </div>
+
+  <!--ゲーム投稿一覧-->
+  <div class="row mt-3 d-flex justify-content-center">
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th>ゲーム画像</th>
+          <th>タイトル</th>
+          <th>ジャンル</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @games.each do |game| %>
+          <tr>
+            <!--ゲーム画像が送られていればそれを表示、送られていなければno_image画像を表示-->
+            <td>
+              <% if game.smallImageUrl.present? %>
+                <%= image_tag game.smallImageUrl %>
+              <% else %>
+                <%= image_tag 'no_image', size: "100×100" %>
+              <% end %>
+            </td>
+            <td><%= game.title %></td>
+            <td><%= I18n.t("enums.game.genre." + game.genre) %></td>
+            <td><%= link_to "詳細", admin_game_path(game.id), class:"btn btn-success" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <!--ページネーション-->
+    <%= paginate @games %>
+  </div>
+</div>

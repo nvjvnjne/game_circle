@@ -27,8 +27,8 @@ class Public::GamesController < ApplicationController
       @games = @games.where('title LIKE ?', "%#{params[:search]}%")
     end
 
-    if params[:genre].present?
-      @games = @games.where('genre LIKE ?', "#{params[:genre]}")
+    if params[:genre_id].present?
+      @games = Game.where(genre_id: params[:genre_id]).page(params[:page])
     end
   end
 
@@ -61,6 +61,6 @@ class Public::GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:title, :genre, :play_condition, :smallImageUrl, :largeImageUrl, :itemUrl, :opinion)
+    params.require(:game).permit(:title, :genre_id, :play_condition, :smallImageUrl, :largeImageUrl, :itemUrl, :opinion)
   end
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # 会員機能
   devise_for :users, controllers: {
     registrations: 'public/registrations',
@@ -33,5 +34,18 @@ Rails.application.routes.draw do
   devise_for :admin,skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }
+
+    # 管理者トップ画面
+    get '/admin'=>'admin/homes#top', as: 'admin_home'
+
+    namespace :admin do
+      resources :users, only: [:show]
+      resources :games, only: [:index, :show, :destroy] do
+        resources :comments, only: [:destroy]
+      end
+      resources :comments, only: [:index]
+      resources :genres, only: [:new, :edit, :create, :update, :destroy]
+    end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

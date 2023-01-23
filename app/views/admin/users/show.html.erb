@@ -1,13 +1,7 @@
-<!--ユーザーページ-->
-<!--フラッシュメッセージ-->
-<div id="notice"><%= flash[:notice] %></div>
-
+<!--管理者ページ-->
 <div class="container">
-  <!--他ユーザーのみページタイトルを表示-->
   <div class="row mt-4 pl-3">
-    <% if @user != current_user %>
-      <h4>ユーザー情報</h4>
-    <% end %>
+    <h4>ユーザー詳細</h4>
   </div>
 
   <!--カード内にユーザー情報を表示-->
@@ -17,12 +11,6 @@
       <div class="col-md-4 d-flex flex-column">
         <div class="image ml-4">
           <%= image_tag @user.get_profile_image(200, 200) %>
-        </div>
-        <!--ログインユーザーが他ユーザーのプロフィールを編集できないようにする-->
-        <div class="link mt-4 ml-4 mb-3">
-          <% if @user == current_user %>
-            <%= link_to "プロフィール編集", edit_user_path(@user), class:"btn btn-primary" %>
-          <% end %>
         </div>
       </div>
 
@@ -50,12 +38,12 @@
     </div>
   </div>
 
-  <!--お気に入りゲーム-->
+    <!--お気に入りゲーム-->
   <div class="row mt-4 d-flex justify-content-center">
     <h4>お気に入りゲーム作品</h4>
   </div>
 
-<!--お気に入り一覧-->
+  <!--お気に入り一覧-->
   <div class="row mt-3 d-flex justify-content-center">
     <table class="table table-hover table-inverse">
       <thead>
@@ -77,31 +65,21 @@
               <% end %>
             </td>
             <td><%= favorite.game.title %></td>
-            <td><%= favorite.game.genre.name %></td>
-            <td><%= link_to "詳細", game_path(favorite.game_id), class:"btn btn-success" %></td>
+            <td><%= I18n.t("enums.game.genre." + favorite.game.genre) %></td>
+            <td><%= link_to "詳細", admin_game_path(favorite.game_id), class:"btn btn-success" %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
 
-  <!--投稿ゲーム一覧と新規投稿ボタン-->
-  <div class="row mt-4 d-flex justify-content-end">
-    <div class="col-md-5">
+  <!--ゲームリスト-->
+  <div class="row mt-4 d-flex justify-content-center">
     <h4>ゲームリスト</h4>
-    </div>
-    <div class="col-md-2">
-      <% if @user == current_user %>
-        <%= link_to new_game_path do %>
-          <i class="fas fa-plus"></i> 投稿する
-        <% end %>
-      <% end %>
-    </div>
   </div>
 
-  <!--投稿ゲーム一覧-->
   <div class="row mt-3 d-flex justify-content-center">
-    <table class="table table-hover table-inverse">
+    <table class="table">
       <thead>
         <tr>
           <th>ゲーム画像</th>
@@ -124,8 +102,8 @@
             </td>
             <td><%= game.title %></td>
             <td><%= I18n.t("enums.game.play_condition." + game.play_condition) %></td>
-            <td><%= game.genre.name %></td>
-            <td><%= link_to "詳細", game_path(game.id), class:"btn btn-success" %></td>
+            <td><%= I18n.t("enums.game.genre." + game.genre) %></td>
+            <td><%= link_to "詳細", admin_game_path(game.id), class:"btn btn-success" %></td>
           </tr>
         <% end %>
       </tbody>

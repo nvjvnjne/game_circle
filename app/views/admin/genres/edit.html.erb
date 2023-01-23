@@ -1,0 +1,21 @@
+<!--管理者ページ-->
+<div class="container">
+  <div class="row mt-4 pl-3">
+    <h4>ジャンル編集</h4>
+  </div>
+
+  <!--ジャンル編集入力欄-->
+  <%= form_with model: @genre, url: admin_genre_path, method: :patch do |f| %>
+    <!--ジャンルタイトル-->
+    <div class="row mt-4 d-flex justify-content-center">
+      <label for="name" class="col-md-2 col-form-label">ジャンル名</label>
+      <div class="col-md-5">
+        <%= f.text_field :name, class:"form-control", id:"name" %>
+      </div>
+    </div>
+
+    <div class="row mt-3 d-flex justify-content-center">
+      <%= f.submit "編集", class:"btn btn-success" %>
+    </div>
+  <% end %>
+</div>
