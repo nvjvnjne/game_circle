@@ -8,4 +8,10 @@ class Admin::GamesController < ApplicationController
     @game = Game.find(params[:id])
     @user = @game.user
   end
+
+  def destroy
+    game = Game.find(params[:id])
+    game.destroy
+    redirect_to admin_games_path(game)
+  end
 end

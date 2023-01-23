@@ -29,7 +29,7 @@
               <% end %>
             </td>
             <td><%= game.title %></td>
-            <td><%= I18n.t("enums.game.genre." + game.genre) %></td>
+            <td><%= game.genre.name %></td>
             <td><%= link_to "詳細", admin_game_path(game.id), class:"btn btn-success" %></td>
           </tr>
         <% end %>

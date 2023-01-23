@@ -65,7 +65,7 @@
               <% end %>
             </td>
             <td><%= favorite.game.title %></td>
-            <td><%= I18n.t("enums.game.genre." + favorite.game.genre) %></td>
+            <td><%= favorite.game.genre.name %></td>
             <td><%= link_to "詳細", admin_game_path(favorite.game_id), class:"btn btn-success" %></td>
           </tr>
         <% end %>
@@ -102,7 +102,7 @@
             </td>
             <td><%= game.title %></td>
             <td><%= I18n.t("enums.game.play_condition." + game.play_condition) %></td>
-            <td><%= I18n.t("enums.game.genre." + game.genre) %></td>
+            <td><%= game.genre.name %></td>
             <td><%= link_to "詳細", admin_game_path(game.id), class:"btn btn-success" %></td>
           </tr>
         <% end %>

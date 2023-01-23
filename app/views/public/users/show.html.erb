@@ -1,6 +1,6 @@
 <!--ユーザーページ-->
 <!--フラッシュメッセージ-->
-<div id="notice"><%= flash[:notice] %></div>
+<div id="notice"><%= notice %></div>
 
 <div class="container">
   <!--他ユーザーのみページタイトルを表示-->
@@ -16,7 +16,11 @@
       <!--プロフィール画像とプロフィール編集ボタン-->
       <div class="col-md-4 d-flex flex-column">
         <div class="image ml-4">
-          <%= image_tag @user.get_profile_image(200, 200) %>
+          <% if @user.nickname == "GuestUser" %>
+            <%= image_tag 'no_image', size:"200×200" %>
+          <% else %>
+            <%= image_tag @user.get_profile_image(200, 200) %>
+          <% end %>
         </div>
         <!--ログインユーザーが他ユーザーのプロフィールを編集できないようにする-->
         <div class="link mt-4 ml-4 mb-3">

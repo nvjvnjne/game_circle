@@ -1,9 +1,18 @@
 <!--管理者ページ-->
+
+<!--フラッシュメッセージ-->
+<div id="notice"><%= flash[:notice] %></div>
+
 <div class="container">
   <!--ページタイトル-->
   <div class="row mt-4 pl-3">
     <div class="col-md-3">
       <h4>ゲーム詳細</h4>
+    </div>
+    <div class="col-md-7">
+    </div>
+    <div class="col-md-2">
+      <%= link_to "削除する", admin_game_path, method: :delete, "data-confirm" => "投稿を削除しますか？", class:"btn btn-danger" %>
     </div>
   </div>
 
@@ -53,7 +62,7 @@
   <div class="row mt-2 d-flex justify-content-center">
     <label class="col-md-2 col-form-label">ジャンル</label>
     <div class="col-md-4 col-form-label">
-      <%= I18n.t("enums.game.genre." + @game.genre) %>
+      <%= @game.genre.name %>
     </div>
   </div>
 

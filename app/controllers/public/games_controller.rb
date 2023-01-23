@@ -17,8 +17,10 @@ class Public::GamesController < ApplicationController
   def create
     game = Game.new(game_params)
     game.user_id = current_user.id
-    game.save
-    redirect_to game_path(game)
+    if game.save
+      flash[:notice] = "投稿完了！"
+      redirect_to game_path(game)
+    end
   end
 
   def index

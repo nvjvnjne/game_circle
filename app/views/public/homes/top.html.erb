@@ -16,24 +16,24 @@
     <div class="col-md-1">
     </div>
     <div class="col-md-3">
-      <% if !user_signed_in? %>
+      <% if !user_signed_in? && !admin_signed_in? %>
         <%= link_to "ログイン", new_user_session_path, class:"btn btn-primary" %>
       <% end %>
     </div>
     <!--新規登録-->
     <div class="col-md-3">
-      <% if !user_signed_in? %>
+      <% if !user_signed_in? && !admin_signed_in? %>
         <%= link_to "新規登録", new_user_registration_path, class:"btn btn-success" %>
       <% end %>
     </div>
   </div>
 
   <div class="row mt-4 d-flex justify-content-center">
-    <% if !user_signed_in? %>
+    <% if !user_signed_in? && !admin_signed_in? %>
       <%= link_to "ゲストログイン", guest_user_session_path, method: :post, class:"btn btn-secondary mr-5" %>
     <% end %>
   </div>
-  
+
   <div class="row mt-2 d-flex justify-content-center">
     <% if !user_signed_in? %>
       <p>※ゲストユーザーは閲覧のみとなります</p>
