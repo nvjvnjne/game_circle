@@ -69,3 +69,6 @@ gem 'enum_help'
 
 # 楽天API実装
 gem 'rakuten_web_service'
+
+#日本語化対応
+gem 'rails-i18n'

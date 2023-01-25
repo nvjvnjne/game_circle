@@ -1,4 +1,5 @@
 <!--管理者ページ-->
+<div id="notice"><%= flash[:notice] %></div>
 <div class="container">
   <div class="row mt-4 pl-3">
     <h4>ユーザ一覧</h4>
@@ -12,6 +13,7 @@
           <th>ユーザー名</th>
           <th>メールアドレス</th>
           <th>退会ステータス</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -29,6 +31,11 @@
               <% end %>
             </td>
             <td><%= link_to "詳細", admin_user_path(user.id), class:"btn btn-success" %></td>
+            <td>
+              <% if user.is_deleted == false %>
+                <%= link_to "停止", admin_user_withdraw_path(user.id), method: :patch, "data-confirm" => "このユーザーを利用停止しますか?", class:"btn btn-secondary" %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

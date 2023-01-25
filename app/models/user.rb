@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   # ゲストユーザー
   def self.guest
     find_or_create_by(email: 'guest@example.com') do |user|
@@ -11,6 +11,8 @@ class User < ApplicationRecord
       user.nickname = "GuestUser"
     end
   end
+
+  validates :nickname, presence: { message: 'を入力してください' }
 
   # アソシエーション
   has_many :games, dependent: :destroy

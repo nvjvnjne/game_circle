@@ -6,3 +6,21 @@ ja:
         play_soon: "プレイ予定"
         have_played: "プレイ済み"
 
+  activerecord:
+    attributes:
+      user:
+        nickname: "名前"
+
+      game:
+        title: "タイトル"
+        genre: "ジャンル"
+        play_condition: "プレイ状況"
+
+      genre:
+        name: "ジャンル名"
+
+      favorite:
+        user: "ユーザー"
+        game: "ゲーム"
+
+

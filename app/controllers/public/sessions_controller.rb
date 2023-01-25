@@ -2,6 +2,8 @@
 
 class Public::SessionsController < Devise::SessionsController
 
+  before_action :user_state, only: [:create]
+
   # ログイン後マイページ画面へ遷移
   def after_sign_in_path_for(resource)
     flash[:notice] = "ログイン成功！"
@@ -13,13 +15,23 @@ class Public::SessionsController < Devise::SessionsController
     flash[:notice] = "ログアウトしました"
     new_user_session_path
   end
-  
+
   # ゲストログイン
   def guest_sign_in
     user = User.guest
     if sign_in user
       flash[:notice] = "ゲストユーザーとしてログインしました"
       redirect_to user_path(current_user)
+    end
+  end
+
+  protected
+
+  def user_state
+    @user = User.find_by(email: params[:user][:email])
+    return if !@user
+    if @user.valid_password?(params[:user][:password]) && (@user.is_deleted == true)
+      redirect_to new_user_registration_path
     end
   end
 

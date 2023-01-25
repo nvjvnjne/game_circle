@@ -5,11 +5,13 @@ class Admin::SessionsController < Devise::SessionsController
 
   # 管理者ログインからトップページ(ユーザー一覧画面)へ遷移
   def after_sign_in_path_for(resource)
+    flash[:notice] = "ログインしました"
     admin_home_path
   end
 
   # 管理者ログインページへ遷移
   def after_sign_out_path_for(resource)
+    flash[:notice] = "ログアウトしました"
     new_admin_session_path
   end
 

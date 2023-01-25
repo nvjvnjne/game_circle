@@ -1,0 +1,27 @@
+<!--ユーザーページ-->
+<!--退会ページ-->
+<div class="container">
+  <div class="row mt-5">
+  </div>
+  <div class="row mt-5 d-flex justify-content-center">
+    <div class="text">
+      <p class="text-left">退会すると、全ての投稿が削除され、投稿、ユーザーの閲覧ができなくなります。<br>
+      また、登録したメールアドレス、パスワードでの再登録ができなくなります。<br>
+      退会するユーザーは上記のことを踏まえた上で、退会してください。
+      </p>
+    </div>
+  </div>
+
+  <div class="row mt-5 d-flex justify-content-center">
+    <div class="col-md-2">
+      <% if current_user.nickname != "GuestUser" %>
+        <%= link_to "退会しない", user_path(current_user), class:"btn btn-primary" %>
+      <% end %>
+    </div>
+    <div class="col-md-2">
+      <% if current_user.nickname != "GuestUser" %>
+        <%= link_to "退会する", user_withdraw_path, method: :patch, "data-confirm" => "退会しますか？", class:"btn btn-danger" %>
+      <% end %>
+    </div>
+  </div>
+</div>

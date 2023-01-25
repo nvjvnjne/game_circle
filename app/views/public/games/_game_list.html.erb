@@ -1,10 +1,9 @@
+<!--ユーザーページ-->
 <div class="container">
-  <!--ユーザーページ-->
-
   <!--未入力で検索した場合、リダイレクトする-->
   <% if params[:keyword].present? %>
     <div class="row mt-2 pl-3">
-      <p><%= @games.count %>件表示</p>
+      <p><%= @games.count %>件表示 ※タイトルをコピー&ペーストしておくと入力時に便利！</p>
     </div>
 
     <!--検索結果-->
@@ -21,6 +20,7 @@
                   <%= form_with model: @game, url: new_game_path, method: :get do |f| %>
                     <%=f.hidden_field :smallImageUrl, value: game['smallImageUrl'] %>
                     <%= f.hidden_field :largeImageUrl, value: game['largeImageUrl'] %>
+                    <%= f.hidden_field :itemUrl, value: game['itemUrl'] %>
                     <%= f.submit "この画像を使う", class:"btn btn-primary" %>
                   <% end %>
                 </th>

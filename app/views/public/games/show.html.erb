@@ -21,7 +21,7 @@
   <!--投稿ゲーム画像-->
   <div class="row mt-2 d-flex justify-content-center">
     <% if @game.largeImageUrl.present? %>
-      <%= image_tag @game.largeImageUrl %>
+      <%= link_to (image_tag(@game.largeImageUrl)), @game.itemUrl %>
     <% else %>
       <%= image_tag 'no_image', size: "200×200" %>
     <% end %>
@@ -34,12 +34,16 @@
     </div>
   </div>
 
-  <!--投稿主-->
+  <!--投稿主(退会されたユーザーは非表示)-->
   <div class="row mt-2 d-flex justify-content-center">
     <label class="col-md-2 col-form-label">投稿主</label>
     <div class="col-md-4 col-form-label">
-      <%= link_to user_path(@user) do %>
-        <%= @user.nickname %>
+      <% if @user.is_deleted == false %>
+        <%= link_to user_path(@user) do %>
+          <%= @user.nickname %>
+        <% end %>
+      <% else %>
+        <p>このユーザーは退会されました</p>
       <% end %>
     </div>
   </div>
@@ -150,7 +154,7 @@
     <%= link_to "戻る", user_path(@user), class:"btn btn-primary" %>
     <!--ログインユーザーのみ編集ページへ遷移-->
     <% if @user == current_user %>
-      <%= link_to "編集する", edit_game_path(@user), class:"btn btn-success ml-5" %>
+      <%= link_to "編集する", edit_game_path(@game), class:"btn btn-success ml-5" %>
     <% end %>
 
   </div>

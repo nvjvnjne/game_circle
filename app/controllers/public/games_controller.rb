@@ -12,14 +12,17 @@ class Public::GamesController < ApplicationController
     @game = Game.new
     @game_sm_image_url = params.dig(:game, :smallImageUrl)
     @game_image_url = params.dig(:game, :largeImageUrl)
+    @game_item_url = params.dig(:game, :itemUrl)
   end
 
   def create
-    game = Game.new(game_params)
-    game.user_id = current_user.id
-    if game.save
+    @game = Game.new(game_params)
+    @game.user_id = current_user.id
+    if @game.save
       flash[:notice] = "投稿完了！"
-      redirect_to game_path(game)
+      redirect_to game_path(@game)
+    else
+      render :new
     end
   end
 
@@ -45,10 +48,12 @@ class Public::GamesController < ApplicationController
   end
 
   def update
-    game = Game.find(params[:id])
-    if game.update(game_params)
+    @game = Game.find(params[:id])
+    if @game.update(game_params)
       flash[:notice] = "編集完了！"
-      redirect_to game_path(game)
+      redirect_to game_path(@game)
+    else
+      render :edit
     end
   end
 

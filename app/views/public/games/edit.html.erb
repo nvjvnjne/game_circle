@@ -4,6 +4,18 @@
     <h4>投稿編集</h4>
   </div>
 
+  <!--エラーメッセージ-->
+  <% if @game.errors.any? %>
+    <div id="error expanation">
+      <h5><%= @game.errors.count %>件のエラーが発生しました</h5>
+      <ul class="alert alert-danger" role="alert">
+        <% @game.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <!--ゲーム画像(編集不可)-->
   <div class="row mt-2 d-flex justify-content-center">
     <% if @game.largeImageUrl.present? %>
@@ -27,7 +39,7 @@
     <div class="row mt-2 d-flex justify-content-center">
       <label for="play_condition" class="col-md-2 col-form-label">プレイ状況</label>
       <div class="col-md-4 col-form-label">
-        <%= f.select :play_condition,  Game.play_conditions.keys.map {|k| [I18n.t("enums.game.play_condition.#{k}"), k]}, id:"play_condition" %>
+        <%= f.select :play_condition,  Game.play_conditions.keys.map {|k| [I18n.t("enums.game.play_condition.#{k}"), k]}, id:"play_condition", include_blank: "選択してください" %>
       </div>
     </div>
 
@@ -35,7 +47,7 @@
     <div class="row mt-2 d-flex justify-content-center">
       <label for="genre" class="col-md-2 col-form-label">ジャンル</label>
       <div class="col-md-4 col-form-label">
-        <%= f.select :genre,  Game.genres.keys.map {|k| [I18n.t("enums.game.genre.#{k}"), k]}, id:"genre" %>
+        <%= f.collection_select :genre_id,  Genre.all, :id, :name, include_blank: "選択してください" %>
       </div>
     </div>
 
@@ -48,10 +60,11 @@
     </div>
 
     <!--編集完了ボタン(ゲストユーザーは非表示)-->
-    <div class="row mt-3 d-flex justify-content-center">
+    <div class="row my-3 d-flex justify-content-center">
       <% if current_user.nickname != "GuestUser" %>
         <%= f.submit "編集完了", class:"btn btn-success" %>
       <% end %>
+        <%= link_to "戻る", game_path, class:"btn btn-primary ml-5" %>
     </div>
   <% end %>
 </div>

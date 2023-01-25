@@ -48,7 +48,7 @@
             <!--ゲーム画像が送られていればそれを表示、送られていなければno_image画像を表示-->
             <td>
               <% if game.smallImageUrl.present? %>
-                <%= image_tag game.smallImageUrl %>
+                <%= link_to (image_tag(game.smallImageUrl)), game.itemUrl %>
               <% else %>
                 <%= image_tag 'no_image', size: "100×100" %>
               <% end %>

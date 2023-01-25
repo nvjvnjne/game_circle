@@ -14,6 +14,18 @@
     </div>
   </div>
 
+
+  <% if @game.errors.any? %>
+    <div id="error expanation">
+      <h5><%= @game.errors.count %>件のエラーが発生しました</h5>
+      <ul class="alert alert-danger" role="alert">
+        <% @game.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
     <!--入力欄-->
     <%= form_with model: @game, url: games_path, method: :post do |f| %>
 
@@ -21,7 +33,7 @@
       <label class="col-md-2 col-form-label">ゲーム画像</label>
       <div class="col-md-4">
         <% if @game_image_url.present? %>
-          <%= image_tag @game_image_url %>
+          <%= link_to (image_tag(@game_image_url)), @game_item_url %>
         <% else %>
           <%= image_tag 'no_image', size: "200×200" %>
         <% end %>
@@ -62,8 +74,9 @@
 
     <%= f.hidden_field :smallImageUrl, value: @game_sm_image_url ||= "" %>
     <%= f.hidden_field :largeImageUrl, value: @game_image_url ||= "" %>
+    <%= f.hidden_field :itemUrl, value: @game_item_url ||= "" %>
     <!--新規登録ボタン-->
-    <div class="row mt-3 d-flex justify-content-center">
+    <div class="row my-3 d-flex justify-content-center">
       <!--ゲストユーザーのみ新規登録できない-->
       <% if current_user.nickname != "GuestUser" %>
         <%= f.submit "決定する", class:"btn btn-primary" %>

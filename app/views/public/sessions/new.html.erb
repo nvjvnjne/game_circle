@@ -1,5 +1,7 @@
 <!--ユーザーログイン画面-->
-<div id="notice"><%= flash[:notice] %></div>
+<% if flash[:notice] %>
+  <div id="notice"><%= flash[:notice] %></div>
+<% end %>
 <div class="container">
   <div class="row mt-5">
   </div>
