@@ -13,6 +13,18 @@
       <h4>ログイン</h4>
     </div>
   </div>
+
+  <% if @user.errors.any? %>
+    <div id="error expanation">
+      <h5><%= @user.errors.count %>件のエラーが発生しました</h5>
+      <ul class="alert alert-danger" role="alert">
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <!--入力フォーム-->
   <%= form_with model: @user, url: user_session_path do |f| %>
     <!--メールアドレス-->

@@ -18,6 +18,9 @@ ja:
 
       genre:
         name: "ジャンル名"
+        
+      comment:
+        comment: "コメント"
 
       favorite:
         user: "ユーザー"

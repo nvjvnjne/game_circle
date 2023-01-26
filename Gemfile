@@ -60,6 +60,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #デバイスの実装
 gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 
 #ページネーションの実装
 gem 'kaminari','~> 1.2.1'

@@ -13,10 +13,22 @@
     <!--削除ボタン-->
     <div class="col-md-2">
       <% if @user == current_user %>
-        <%= link_to "削除する", game_path, method: :delete, "data-confirm" => "投稿を削除しますか？", class:"btn btn-danger" %>
+        <%= link_to "削除する", game_path(@game), method: :delete, "data-confirm" => "投稿を削除しますか？", class:"btn btn-danger" %>
       <% end %>
     </div>
   </div>
+
+    <!--エラーメッセージ(コメント)-->
+    <% if @comment.errors.any? %>
+    <div id="error expanation">
+      <h5><%= @comment.errors.count %>件のエラーが発生しました</h5>
+      <ul class="alert alert-danger" role="alert">
+        <% @comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <!--投稿ゲーム画像-->
   <div class="row mt-2 d-flex justify-content-center">

@@ -12,6 +12,7 @@ class User < ApplicationRecord
     end
   end
 
+  # バリデーション
   validates :nickname, presence: { message: 'を入力してください' }
 
   # アソシエーション

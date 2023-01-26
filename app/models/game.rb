@@ -6,6 +6,7 @@ class Game < ApplicationRecord
   has_many :favorites, dependent: :destroy
   belongs_to :genre
 
+  # バリデーション
   validates :title, presence: { message: 'を入力してください' }
   validates :play_condition, presence: { message: 'を入力してください' }
 
