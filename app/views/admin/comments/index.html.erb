@@ -21,7 +21,7 @@
               <% if comment.user.is_deleted == false %>
                 <%= comment.user.nickname %>
               <% else %>
-                <%= link_to comment.user.nickname, admin_user_path(comment.user_id) %>
+                <%= link_to "退会ユーザー", admin_user_path(comment.user_id) %>
               <% end %>
             </td>
             <td><%= comment.comment %></td>
