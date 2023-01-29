@@ -17,7 +17,13 @@
         <% @comments.each do |comment| %>
           <tr>
             <td><%= comment.id %></td>
-            <td><%= comment.user.nickname %></td>
+            <td>
+              <% if comment.user.is_deleted == false %>
+                <%= comment.user.nickname %>
+              <% else %>
+                <%= link_to comment.user.nickname, admin_user_path(comment.user_id) %>
+              <% end %>
+            </td>
             <td><%= comment.comment %></td>
             <td><%= link_to "詳細", admin_game_path(comment.game_id), class:"btn btn-success" %></td>
           </tr>
