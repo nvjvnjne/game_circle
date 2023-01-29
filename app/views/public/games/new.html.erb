@@ -35,7 +35,7 @@
         <% if @game_image_url.present? %>
           <%= link_to (image_tag(@game_image_url)), @game_item_url %>
         <% else %>
-          <%= image_tag 'no_image', size: "200×200" %>
+          <%= image_tag asset_path('no_image.jpg'), size: "200×200" %>
         <% end %>
       </div>
     </div>

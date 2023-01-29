@@ -22,7 +22,7 @@
             <td>
               <%= link_to user_path(user.id) do %>
                 <% if user.nickname == "GuestUser" %>
-                  <%= image_tag 'no_image', size:"100×100" %>
+                  <%= image_tag asset_path('no_image.jpg'), size:"100×100" %>
                 <% else %>
                   <%= image_tag user.get_profile_image(100, 100) %>
                 <% end %>

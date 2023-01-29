@@ -50,7 +50,7 @@
               <% if game.smallImageUrl.present? %>
                 <%= link_to (image_tag(game.smallImageUrl)), game.itemUrl %>
               <% else %>
-                <%= image_tag 'no_image', size: "100×100" %>
+                <%= image_tag asset_path('no_image.jpg'), size: "100×100" %>
               <% end %>
             </td>
             <td><%= game.title %></td>
