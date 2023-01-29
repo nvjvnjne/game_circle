@@ -31,6 +31,16 @@
                 <th>お気に入りゲーム作品</th>
                 <th><%= @user.fav_game %></th>
               </tr>
+              <tr>
+                <th></th>
+                <th>
+                  <% if @user.is_deleted == true %>
+                    <p class="text-secondary">退会済み</p>
+                  <% else %>
+                    <p class="text-success">有効</p>
+                  <% end %>
+                </th>
+              </tr>
             </thead>
           </table>
         </div>

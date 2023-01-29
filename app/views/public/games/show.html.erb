@@ -143,12 +143,21 @@
               <%= comment.created_at.strftime('%R:%S') %>
             </th>
             <th>
-              <%= link_to user_path(comment.user_id) do %>
-                <%= image_tag comment.user.get_profile_image(100, 100) %><br>
-                <%= comment.user.nickname %>
+              <% if comment.user.is_deleted == false %>
+                <%= link_to user_path(comment.user_id) do %>
+                  <%= image_tag comment.user.get_profile_image(100, 100) %><br>
+                  <%= comment.user.nickname %>
+                <% end %>
+              <% else %>
+                <p>このユーザーは退会されました</p>
               <% end %>
             </th>
-            <th><%= comment.comment %></th>
+            <th>
+              <% if comment.user.is_deleted == false %>
+                <%= comment.comment %></th>
+              <% else %>
+                <p>非表示</p>
+              <% end %>
             <th>
               <% if comment.user == current_user %>
                 <%= link_to "削除する", game_comment_path(comment.game, comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class:"btn btn-danger" %>

@@ -106,9 +106,13 @@
               <%= comment.created_at.strftime('%R:%S') %>
             </th>
             <th>
-              <%= link_to user_path(comment.user_id) do %>
-                <%= image_tag comment.user.get_profile_image(100, 100) %><br>
-                <%= comment.user.nickname %>
+              <% if comment.user.is_deleted == false %>
+                <%= link_to admin_user_path(comment.user_id) do %>
+                  <%= image_tag comment.user.get_profile_image(100, 100) %><br>
+                  <%= comment.user.nickname %>
+                <% end %>
+              <% else %>
+                <%= link_to "このユーザーは退会しています", admin_user_path(comment.user_id) %>
               <% end %>
             </th>
             <th><%= comment.comment %></th>
