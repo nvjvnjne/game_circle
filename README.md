@@ -38,4 +38,4 @@ https://drive.google.com/file/d/1IbkCK5G2nXkGscA9BoXoWbbmxPRy9Wda/view?usp=shari
 - IDE：Cloud9
 
 ## 使用素材
-使用検討中
+楽天API
