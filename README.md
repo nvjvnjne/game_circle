@@ -23,7 +23,12 @@
 ・ゲームを探したい時
 
 ## 設計書
-<...>
+。アプリケーション詳細設計書
+https://docs.google.com/spreadsheets/d/15OElOL0DP0YdH_zv3YldVQ785ER6Y_Rv2uGWpTaU2F4/edit?usp=sharing
+・テーブル定義書
+https://docs.google.com/spreadsheets/d/1oYwRpBOdgFv82EfLj68ADXqL0DDrIQPd0rKRAWeuE00/edit?usp=sharing
+・ER図
+https://drive.google.com/file/d/1IbkCK5G2nXkGscA9BoXoWbbmxPRy9Wda/view?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
